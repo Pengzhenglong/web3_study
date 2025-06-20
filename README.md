@@ -58,3 +58,17 @@
 
  ##  4. 编写前端页面
  
+#### npx create-next-app@latest
+
+安装时，您将看到以下提示：
+What is your project named? my-app
+Would you like to use TypeScript? No / Yes   （no）
+Would you like to use ESLint? No / Yes  (yes)
+Would you like to use Tailwind CSS? No / Yes   (yes)
+Would you like your code inside a `src/` directory? No / Yes  (no)
+Would you like to use App Router? (recommended) No / Yes   (yes)
+Would you like to use Turbopack for `next dev`?  No / Yes (no)
+Would you like to customize the import alias (`@/*` by default)? No / Yes (yes)
+What import alias would you like configured? @/* 
+
+###  "tailwindcss": "^3.4.17" 使用3.4版本，不然会不生效
