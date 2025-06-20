@@ -20,13 +20,24 @@
  ### 3. 合约部署与使用 cast 进行调用
  anvil
 
+
+更新 .env重启
  source .env
 
+部署
   forge create --private-key ${OWNER_PRIVATE_KEY} src/LuLuCoin.sol:LuLuCoin --constructor-args ${OWNER_ADDRESS}
 
    cast to-dec ${OWNER_ADDRESS} (0xf39)
 
+查看合约地址
     forge create --private-key ${OWNER_PRIVATE_KEY}  --broadcast  src/LuLuCoin.sol:LuLuCoin --constructor-args ${OWNER_ADDRESS}
+
+
+更新 .env重启
+ source .env
+      forge create --private-key ${USER1_PRIVATE_KEY}  --broadcast  src/LuLuCoin.sol:LuLuCoin --constructor-args ${USER1_ADDRESS}
+
+
 ### 更新env文件
      source .env 
 ### 铸币
@@ -43,6 +54,10 @@
 ### 销毁一半代币
 
      cast send ${CONTRACT_ADDRESS} "burn(uint256)" 5000000000000000000 --private-key ${OWNER_PRIVATE_KEY}
+
+
+
+     cast send ${CONTRACT_ADDRESS} "burn(uint256)" 105000000000000000000 --private-key ${USER1_PRIVATE_KEY}
 
      100000000000000000000
      5000000000000000000

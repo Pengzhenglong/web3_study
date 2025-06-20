@@ -7,34 +7,28 @@ import BiliBili from "@/public/assets/bilibili.png";
 // 导入本地的 GitHub 图标资源
 import Github from "@/public/assets/github.png";
 // 导入 ethers 库，用于与以太坊区块链进行交互
-// import { ethers } from "ethers";
+import { ethers } from "ethers";
 
 // 导出默认组件 Navbar，接收两个 props：accounts（当前连接的账户列表）和 setAccounts（更新账户的方法）
 export default function Navbar({ accounts, setAccounts }) {
   // 判断是否已连接账户，若 accounts 数组的第一个元素存在，则表示已连接
-  // const isConnected = Boolean(accounts[0]);
+   const isConnected   = Boolean(accounts[0]); 
 
-  // 定义异步函数 connectAccount，用于连接用户的以太坊钱包
-  async function connectAccount() {
-    // try {
-    //   // 检查浏览器是否提供了以太坊对象（window.ethereum），这是与钱包交互的入口
-    //   if (window.ethereum) {
-    //     // 调用以太坊对象的请求方法，请求用户授权并返回账户列表
-    //     const accounts = await window.ethereum.request({
-    //       method: "eth_requestAccounts",
-    //     });
-    //     // 更新父组件传递的账户状态
-    //     setAccounts(accounts);
-    //   } else {
-    //     // 如果未检测到以太坊对象，输出错误信息
-    //     console.error("Ethereum provider not found.");
-    //   }
-    // } catch (e) {
-    //   // 捕获连接失败的异常，并在控制台打印错误信息
-    //   console.error("Failed to connect to accounts:", e);
-    // }
+   async function connectAccount() {
+      try{
+        if(window.ethereum){
+          const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
+
+          setAccounts(accounts);
+        }else{
+           console.error("Ethereum provider not found.");
+        }
+      } catch (error) {
+        console.error("Failed to connect to accounts:", error);
+      }
+  
   }
-
+   
   // 返回 Navbar 的 JSX 内容
   return (
     <>
@@ -73,10 +67,6 @@ export default function Navbar({ accounts, setAccounts }) {
           </Link>
         </div>
 
-
-
-
-
         {/* 右侧部分：包含连接钱包按钮和其他操作 */}
         <div className="flex items-center space-x-6 text-2xl">
           {/* 联系作者的链接，点击后通过邮件联系 */}
@@ -89,14 +79,7 @@ export default function Navbar({ accounts, setAccounts }) {
           </Link>
 
           {/* 根据是否已连接钱包动态显示内容 */}
-
-               <button
-              onClick={connectAccount}
-              className="bg-pink-600 px-6 py-2 rounded-md shadow-lg hover:bg-pink-700 transition duration-300"
-            >
-              连接钱包
-            </button>
-          {/* {isConnected ? (
+          {isConnected ? (
             // 如果已连接账户，显示已连接状态
             <p className="bg-pink-600 px-6 py-2 rounded-md">已连接</p>
           ) : (
@@ -107,7 +90,7 @@ export default function Navbar({ accounts, setAccounts }) {
             >
               连接钱包
             </button>
-          )} */}
+          )}
         </div>
       </div>
     </>
